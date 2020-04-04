@@ -1,0 +1,27 @@
+.App {
+	background-color: #5bc0eb;
+	font-size: calc(10px + 1.5vmin);
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.main {
+	border: 1.5px solid #a6a6a6;
+	padding-left: 10px;
+	padding-right: 100px;
+	margin-bottom: 30px;
+	margin-right: 100px;
+	width: 100%;
+}
+h1 {
+	text-align: center;
+}
+.weatherMain {
+	line-height: 3px;
+	padding-bottom: 5px;
+}
+.weatherMain h5 {
+	font-weight: 800;
+}
