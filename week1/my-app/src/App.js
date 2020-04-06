@@ -5,7 +5,7 @@ import Guarantee from './Perfect-customer/PerfectCustomer';
 import Icon1 from './Icons/f-delivery.png';
 import Icon2 from './Icons/coin.png';
 import Icon3 from './Icons/chat.png';
-import Counter from './exercise3/Exercise3';
+import Counter from './Exercise3/Exercise3';
 
 function App() {
 	return (
