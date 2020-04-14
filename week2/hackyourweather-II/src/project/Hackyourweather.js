@@ -13,7 +13,7 @@ const Hackyourweather = () => {
 
 	useEffect(
 		() => {
-			fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKEY}`)
+			fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKEY}`)
 				.then((res) => res.json())
 				.then((data) => {
 					setState(data);
