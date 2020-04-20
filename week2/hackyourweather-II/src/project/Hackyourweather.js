@@ -5,11 +5,11 @@ import Search from './Search';
 
 const APIKEY = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
 const Hackyourweather = () => {
-	const [ state, setState ] = useState('');
+	const [ state, setState ] = useState(null);
 	const [ city, setCity ] = useState('Damascus');
 	const [ isLoading, setLoading ] = useState(true);
 	const [ error, setError ] = useState(false);
-	const [ Value, setValue ] = useState('');
+	const [ inputValue, setInputValue ] = useState('');
 
 	useEffect(
 		() => {
@@ -28,10 +28,10 @@ const Hackyourweather = () => {
 		[ city ]
 	);
 	const handelSearch = (e) => {
-		setValue(e.target.value);
+		setInputValue(e.target.value);
 	};
 	const handleButton = () => {
-		setCity(Value);
+		setCity(inputValue);
 	};
 
 	return (
@@ -46,7 +46,13 @@ const Hackyourweather = () => {
 			{state && (
 				<Infoweather
 					name={state ? state.name : ''}
-					country={state.sys ? state.sys.country : <h3> No cities searched for yet</h3>}
+					country={
+						state.sys ? (
+							state.sys.country
+						) : (
+							<h4> no cities searched for yet or check the correct city name</h4>
+						)
+					}
 					main={state.weather ? state.weather[0].main : ''}
 					description={state.weather ? state.weather[0].description : ''}
 					minTemp={state.main ? state.main.temp_min : ''}
