@@ -1,66 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Infoweather from './Infoweather';
 import Button from './Button';
 import Search from './Search';
 
 const APIKEY = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
 const Hackyourweather = () => {
-	const [ state, setState ] = useState(null);
-	const [ city, setCity ] = useState('Damascus');
-	const [ isLoading, setLoading ] = useState(true);
-	const [ error, setError ] = useState(false);
+	const [ cities, setCities ] = useState();
+	const [ message, setMessage ] = useState(' No cities searched for yet... ');
+	const [ isLoading, setLoading ] = useState(false);
+	const [ error, setError ] = useState('');
 	const [ inputValue, setInputValue ] = useState('');
 
-	useEffect(
-		() => {
-			fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKEY}`)
-				.then((res) => res.json())
-				.then((data) => {
-					setState(data);
-					setLoading(false);
-				})
-				.catch((err) => {
-					console.log('error', err);
-					setError(true);
-					setLoading(false);
-				});
-		},
-		[ city ]
-	);
+	const getCity = async (city) => {
+		setLoading(true);
+		setMessage('');
+		try {
+			const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKEY}`);
+			if (response.ok) {
+				const data = await response.json();
+				setCities(data);
+				setLoading(false);
+				setError('');
+			} else {
+				setError('City name not found...');
+				setLoading(false);
+			}
+		} catch (err) {
+			console.log(err);
+			setError('Something went wrong...');
+		}
+	};
+
 	const handelSearch = (e) => {
 		setInputValue(e.target.value);
 	};
-	const handleButton = () => {
-		setCity(inputValue);
+	const handelButton = (e) => {
+		e.preventDefault();
+		getCity(inputValue);
 	};
 
 	return (
 		<div>
-			{error && <h1>Something went wrong</h1>}
-			{isLoading && <h1>{isLoading && 'Loading...'}</h1>}
 			<h1>Weather</h1>
-			<div className="btn2">
+			<h3>{message}</h3>
+			<form className="btn2">
 				<Search handelSearch={handelSearch} />
-				<Button handelButton={handleButton} />
-			</div>
-			{state && (
-				<Infoweather
-					name={state ? state.name : ''}
-					country={
-						state.sys ? (
-							state.sys.country
-						) : (
-							<h4> no cities searched for yet or check the correct city name</h4>
-						)
-					}
-					main={state.weather ? state.weather[0].main : ''}
-					description={state.weather ? state.weather[0].description : ''}
-					minTemp={state.main ? state.main.temp_min : ''}
-					maxTemp={state.main ? state.main.temp_max : ''}
-					lat={state.coord ? state.coord.lat : ''}
-					lon={state.coord ? state.coord.lon : ''}
-				/>
-			)}
+				<Button handelButton={handelButton} />
+			</form>
+
+			{error && <h2>{error}</h2>}
+			{isLoading && <h1> Loading...</h1>}
+			{cities && <Infoweather props={cities} />}
 		</div>
 	);
 };
