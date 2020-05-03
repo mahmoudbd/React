@@ -1,22 +1,22 @@
 import React from 'react';
 
-const Infoweather = ({ props }) => {
+const Infoweather = ({ city }) => {
 	const kelvinToCelcius = (kelvin) => {
 		return (kelvin - 273).toFixed(2);
 	};
 	return (
 		<div className="main">
 			<h3>
-				{props.name} {props.sys.country}
+				{city.name} {city.sys.country}
 			</h3>
 			<div className="weatherMain">
-				<h5>{props.weather[0].main}</h5>
-				<p> {props.weather[0].description} </p>
+				<h5>{city.weather[0].main}</h5>
+				<p> {city.weather[0].description} </p>
 			</div>
-			<p> min temp: {kelvinToCelcius(props.main.temp_min)} °C </p>
-			<p> max temp: {kelvinToCelcius(props.main.temp_max)} °C </p>
+			<p> min temp: {kelvinToCelcius(city.main.temp_min)} °C </p>
+			<p> max temp: {kelvinToCelcius(city.main.temp_max)} °C </p>
 			<p>
-				location: {props.coord.lat} {props.coord.lon}
+				location: {city.coord.lat} {city.coord.lon}
 			</p>
 		</div>
 	);

@@ -50,7 +50,7 @@ const Hackyourweather = () => {
 
 			{error && <h2>{error}</h2>}
 			{isLoading && <h1> Loading...</h1>}
-			{cities && <Infoweather props={cities} />}
+			{cities && <Infoweather city={cities} />}
 		</div>
 	);
 };
