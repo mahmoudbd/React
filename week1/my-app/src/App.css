@@ -43,5 +43,13 @@
 	border: 2px solid #262626;
 	padding: 10px;
 	margin: 10px;
-
+}
+.guarantee {
+	float: left;
+	width: 33%;
+}
+.guarant {
+	margin-left: 50px;
+	padding: 20px;
+	height: 200px;
 }

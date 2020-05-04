@@ -3,8 +3,8 @@ import '../App.css';
 
 const Guarantee = ({ img, title, description }) => {
 	return (
-		<div style={{ display: 'inline-block', padding: '15px', width: '28%' }}>
-			<img src={img} alt={'title'} />
+		<div className="guarantee">
+			<img src={img} alt="" />
 			<h4>{title}</h4>
 			<p>{description}</p>
 		</div>
